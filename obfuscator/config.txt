@@ -1,0 +1,23 @@
+#obfuscator "SUSANIN"
+
+#input/output files
+input = OiB_passCheck.cpp
+output = obscufated.cpp
+
+#functions rename
+enable_function_permutation = true
+
+#hunk variables
+enable_junk_variables = true
+
+#junk functions
+enable_junk_functions = true
+
+#name obfuscation
+enable_name_obfuscation = true
+
+#comment remove
+enable_delete_comments = true
+
+#space delete
+enable_delete_spaces = false
