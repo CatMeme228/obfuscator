@@ -128,10 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="libs\comment_remover.cpp" />
+    <ClCompile Include="libs\space_remover.cpp" />
     <ClCompile Include="obfuscator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="libs\comment_remover.h" />
+    <ClInclude Include="libs\myHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-п»ї#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 
@@ -7,15 +7,15 @@ void encryption(char* pass) {
 }
 
 /*
-РјРЅРѕРіРѕСЃС‚СЂРѕС‡РЅС‹Р№
-РєРѕРјРјРµРЅС‚Р°СЂРёР№
+многострочный
+комментарий
 */
 
-//РџРµСЂРµРЅРѕСЃ\
-СЃС‚СЂРѕРєРё
+//Перенос\
+строки
 
 int passCheck(char* pass) {
-	FILE* input = fopen("D:\\OiB\\lab 6\\mypass\\xor.txt", "r"); //Р°РґСЂРµСЃСЃ
+	FILE* input = fopen("D:\\OiB\\lab 6\\mypass\\xor.txt", "r"); //адресс
 	char correctPassword[512] = { '\0' };
 	fgets(correctPassword, 512, input);
 	encryption(pass);

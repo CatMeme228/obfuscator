@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "libs/comment_remover.h"
+#include <windows.h>
+
+#include "libs/myHeader.h"
 
 void readConfig(char** settings) {
 	//открываем конфиг
@@ -38,23 +40,38 @@ void clearConfig(char** conf) {
 	free(conf);
 }
 
+
 int main() {
 	//читаем конфиг
 	char** configs = (char**)malloc(sizeof(char*)*7);
 	readConfig(configs);
 
-	//ПРИ ВСЕХ FALSE БУДЕТ ПУСТОЙ ФАЙЛ
-	FILE* input = fopen(configs[0], "r");
+	//копируем исходник
+	CopyFileA(configs[0], "temp.tmp", FALSE); 
+
+	FILE* input = fopen("temp.tmp", "r");
 	FILE* output = fopen(configs[1], "w");
 
 	// 5 прог, которые делают что-то своё
-
-	if (strcmp(configs[3], "true") == 0) { //далить комментарии
-		if (remove_comments(input, output) == 0) printf("Comments were deleted!\n");
+	if (strcmp(configs[2], "true") == 0) { //удалить комментарии
+		if (comment_remover(input, output) == 0) printf("Comments were deleted!\n");
 		else printf("Failed to delete comments\n");
+
+		//копируем промежуточный результат
+		fclose(input);
+		CopyFileA(configs[1], "temp.tmp", FALSE);
+		input = fopen("temp.tmp", "r");
 	}
 	
-	if (strcmp(configs[2], "true") == 0) {} //удалить пробелы
+	if (strcmp(configs[3], "true") == 0) { //удалить пробелы
+		if (space_remover(input, output) == 0) printf("Spaces, \\n and tabulation were deleted!\n");
+		else printf("Failed to delete spaces and etc\n");
+
+		//копируем промежуточный результат
+		fclose(input);
+		CopyFileA(configs[1], "temp.tmp", FALSE);
+		input = fopen("temp.tmp", "r");
+	} 
 
 	if (strcmp(configs[4], "true") == 0) {}//переименование функций
 
@@ -62,9 +79,11 @@ int main() {
 
 	if (strcmp(configs[6], "true") == 0) {}//мусор
 
-	clearConfig(configs);
 
+	//очистка всего
+	clearConfig(configs);
 	fclose(input);
 	fclose(output);
+	DeleteFileA("temp.tmp");
 	return 0;
 }

@@ -2,13 +2,13 @@
 
 #input/output files
 input = OiB_passCheck.cpp
-output = obs_res.cpp
-
-#space delete
-enable_delete_spaces = false
+output = result.cpp
 
 #comment remove
-enable_delete_comments = true
+comment_remover = true
+
+#space delete
+space_remover = true
 
 #functions and var rename
 enable_function_and_var_rename = false

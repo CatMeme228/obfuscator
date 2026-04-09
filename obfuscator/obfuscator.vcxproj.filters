@@ -21,9 +21,12 @@
     <ClCompile Include="libs\comment_remover.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="libs\space_remover.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="libs\comment_remover.h">
+    <ClInclude Include="libs\myHeader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

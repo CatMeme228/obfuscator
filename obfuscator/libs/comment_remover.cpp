@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "comment_remover.h"
+#include "myHeader.h"
 
-int remove_comments(FILE* input, FILE* output) {
+int comment_remover(FILE* input, FILE* output) {
     if (!input || !output) return -1;
 
     int stringStatus = 0;
