@@ -30,15 +30,15 @@ void readConfing(FILE* conf, char** settings) {
 int main() {
 	//читаем конфиг
 	FILE* config = fopen("config.txt", "r");
-	char** configs = (char**)malloc(sizeof(char*)*8);
+	char** configs = (char**)malloc(sizeof(char*)*7);
 	readConfing(config, configs);
 	fclose(config);
-
+	//ПРИ ВСЕХ FALSE БУДЕТ ПУСТОЙ ФАЙЛ
 	FILE* input = fopen(configs[0], "r");
 	FILE* output = fopen(configs[1], "w");
 
-	remove_comments(input, output);
-
+	if (strcmp(configs[3], "true")==0)remove_comments(input, output);
+	//if (strcmp(configs[3], "true") == 0)remove_comments(input, output);
 
 	fclose(input);
 	fclose(output);

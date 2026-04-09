@@ -2,22 +2,22 @@
 
 #input/output files
 input = OiB_passCheck.cpp
-output = obscufated.cpp
+output = obs_res.cpp
 
-#functions rename
-enable_function_permutation = true
-
-#hunk variables
-enable_junk_variables = true
-
-#junk functions
-enable_junk_functions = true
-
-#name obfuscation
-enable_name_obfuscation = true
+#space delete
+enable_delete_spaces = false
 
 #comment remove
 enable_delete_comments = true
 
-#space delete
-enable_delete_spaces = false
+#functions and var rename
+enable_function_and_var_rename = false
+
+#shake functions
+enable_functions_shake = false
+
+#junk functions
+enable_junk_functions = false
+
+
+
