@@ -48,13 +48,14 @@ int main() {
 	FILE* output = fopen(configs[1], "w");
 
 	// 5 прог, которые делают что-то своё
-	if (strcmp(configs[2], "true") == 0) {} //удалить пробелы
 
 	if (strcmp(configs[3], "true") == 0) { //далить комментарии
-		printf("Comments were deleted!\n");
-		remove_comments(input, output); 
+		if (remove_comments(input, output) == 0) printf("Comments were deleted!\n");
+		else printf("Failed to delete comments\n");
 	}
 	
+	if (strcmp(configs[2], "true") == 0) {} //удалить пробелы
+
 	if (strcmp(configs[4], "true") == 0) {}//переименование функций
 
 	if (strcmp(configs[5], "true") == 0) {}//перемешивание функций

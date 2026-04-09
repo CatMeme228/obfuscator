@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="obfuscator/obfuscator.vcxproj" />
+  <Project Path="obfuscator/obfuscator.vcxproj" Id="04b3b4cb-fb1c-449d-abda-de2b005491a4" />
 </Solution>
