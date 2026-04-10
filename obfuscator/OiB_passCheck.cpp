@@ -14,7 +14,7 @@ void encryption(char* pass) {
 //Перенос\
 строки
 
-int passCheck(char* pass) {
+int    passCheck(char* pass) {
 	FILE* input = fopen("D:\\OiB\\lab 6\\mypass\\xor.txt", "r"); //адрес
 	char correctPassword[512] = { '\0' };
 	fgets(correctPassword, 512, input);

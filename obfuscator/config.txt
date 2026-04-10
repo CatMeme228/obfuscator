@@ -7,9 +7,6 @@ output = result.cpp
 #comment remove
 comment_remover = true
 
-#space delete
-space_remover = true
-
 #functions and var rename
 enable_function_and_var_rename = false
 
@@ -19,5 +16,5 @@ enable_functions_shake = false
 #junk functions
 enable_junk_functions = false
 
-
-
+#space delete
+space_remover = true

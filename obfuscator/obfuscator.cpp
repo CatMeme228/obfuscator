@@ -59,31 +59,36 @@ int main() {
 
 		//копируем промежуточный результат
 		fclose(input);
+		fclose(output);
 		CopyFileA(configs[1], "temp.tmp", FALSE);
 		input = fopen("temp.tmp", "r");
+		output = fopen(configs[1], "w");
 	}
-	
-	if (strcmp(configs[3], "true") == 0) { //удалить пробелы
+
+	if (strcmp(configs[3], "true") == 0) {}//переименование функций
+
+	if (strcmp(configs[4], "true") == 0) {}//перемешивание функций
+
+	if (strcmp(configs[5], "true") == 0) {}//мусор
+
+	if (strcmp(configs[6], "true") == 0) { //удалить пробелы
 		if (space_remover(input, output) == 0) printf("Spaces, \\n and tabulation were deleted!\n");
 		else printf("Failed to delete spaces and etc\n");
 
 		//копируем промежуточный результат
 		fclose(input);
+		fclose(output);
 		CopyFileA(configs[1], "temp.tmp", FALSE);
 		input = fopen("temp.tmp", "r");
-	} 
-
-	if (strcmp(configs[4], "true") == 0) {}//переименование функций
-
-	if (strcmp(configs[5], "true") == 0) {}//перемешивание функций
-
-	if (strcmp(configs[6], "true") == 0) {}//мусор
-
+		output = fopen(configs[1], "w");
+	}
 
 	//очистка всего
-	clearConfig(configs);
 	fclose(input);
 	fclose(output);
+	CopyFileA("temp.tmp", configs[1], FALSE);
 	DeleteFileA("temp.tmp");
+
+	clearConfig(configs);
 	return 0;
 }
