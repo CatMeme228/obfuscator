@@ -7,14 +7,15 @@ output = result.cpp
 #comment remove
 comment_remover = true
 
+#junk functions
+junk_code = false
+
 #functions and var rename
 enable_function_and_var_rename = false
 
 #shake functions
 enable_functions_shake = false
 
-#junk functions
-enable_junk_functions = false
 
 #space delete
-space_remover = true
+space_remover = false

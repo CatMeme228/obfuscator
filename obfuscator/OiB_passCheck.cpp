@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 
-void encryption(char* pass) {
-	for (; *pass; pass++) *pass = *pass ^ 101;
-}
+
+void encryption(char* pass);
+int    passCheck(char* pass);
 
 /*
 многострочный
@@ -13,15 +13,6 @@ void encryption(char* pass) {
 
 //Перенос\
 строки
-
-int    passCheck(char* pass) {
-	FILE* input = fopen("D:\\OiB\\lab 6\\mypass\\xor.txt", "r"); //адрес
-	char correctPassword[512] = { '\0' };
-	fgets(correctPassword, 512, input);
-	encryption(pass);
-	if (strcmp(pass, correctPassword) == 0) return 1;
-	return 0;
-}
 
 int main() {
 	char inp[512] = { '\0' };
@@ -32,4 +23,17 @@ int main() {
 	getchar();
 	getchar();
 	return 0;
+}
+
+int    passCheck(char* pass) {
+	FILE* input = fopen("D:\\OiB\\lab 6\\mypass\\xor.txt", "r"); //адрес
+	char correctPassword[512] = { '\0' };
+	fgets(correctPassword, 512, input);
+	encryption(pass);
+	if (strcmp(pass, correctPassword) == 0) return 1;
+	return 0;
+}
+
+void encryption(char* pass) {
+	for (; *pass; pass++) *pass = *pass ^ 101;
 }
