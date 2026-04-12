@@ -6,11 +6,11 @@
 
 int braces = 0, everEnteredMain=0;
 int mainCheck(char* buffer, int flag);
-int isInitialization(char* line, int firstInit=1);
+int isInitialization(char* line);
 
 int junk_code(FILE* input, FILE* output) {
 	if (!input || !output) return -1;
-	int junkNumber = 1, AmountOfJunkFunctions=0;
+	int junkNumber = 0, AmountOfJunkFunctions=0;
 
 	//мусор
 	char junk_function_init[] = "int veryUsefulFunction%d (int hihi, int haha);\n";
@@ -44,10 +44,10 @@ int junk_code(FILE* input, FILE* output) {
 	while (fgets(buffer, 300, input)) {
 		mainFlag = mainCheck(buffer, mainFlag);
 		if (mainFlag == 0 && isInitialization(buffer)) {
-			fputs(buffer, output);
-			fprintf(output, junk_function_init, junkNumber);
 			junkNumber++;
 			AmountOfJunkFunctions++;
+			fprintf(output, junk_function_init, junkNumber);
+			fputs(buffer, output);
 		}
 
 		else if (mainFlag == 1) {
@@ -59,7 +59,7 @@ int junk_code(FILE* input, FILE* output) {
 			}
 		}
 
-		else if (mainFlag == 2 && isInitialization(buffer, 0)) {
+		else if (mainFlag == 2 && isInitialization(buffer)) {
 			for (int i = 0; i < 9; i++) fprintf(output, junk_function[i], AmountOfJunkFunctions);
 			AmountOfJunkFunctions--;
 			fputs(buffer, output); //основная (имеющая смысл) функция
@@ -69,19 +69,18 @@ int junk_code(FILE* input, FILE* output) {
 	return 0;
 }
 
-int isInitialization(char* line, int firstInit) {
+int isInitialization(char* line) {
 	char keyWords[][20] = {"int", "long", "unsigned", "char", "float", "double", "void", "static", "short", "signed"};
 	char* tmp = line;
 	while (*tmp == ' ') tmp++;
-	int keyWordFound = 0, semicolonFound=0;
+	int keyWordFound = 0;
 	for (int i = 0; i < 9; i++) {
 		if (strncmp(tmp, keyWords[i], strlen(keyWords[i])) == 0) {
 			keyWordFound=1;
 			break;
 		}
 	}
-	if (strchr(tmp, ';') != NULL || firstInit==0) semicolonFound = 1;
-	return keyWordFound && semicolonFound;
+	return keyWordFound;
 }
 
 int mainCheck(char* line, int flag) {
