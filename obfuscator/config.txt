@@ -8,7 +8,7 @@ output = result.cpp
 comment_remover = true
 
 #junk functions
-junk_code = false
+junk_code = true
 
 #functions and var rename
 enable_function_and_var_rename = false
@@ -18,4 +18,4 @@ enable_functions_shake = false
 
 
 #space delete
-space_remover = false
+space_remover = true

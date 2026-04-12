@@ -98,7 +98,6 @@ int main() {
 	fclose(output);
 	CopyFileA("temp.tmp", configs[1], FALSE);
 	DeleteFileA("temp.tmp");
-
 	clearConfig(configs);
 	return 0;
 }

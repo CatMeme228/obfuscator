@@ -12,7 +12,7 @@ int    passCheck(char* pass);
 */
 
 //Перенос\
-строки
+int
 
 int main() {
 	char inp[512] = { '\0' };
