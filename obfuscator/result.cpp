@@ -20,26 +20,20 @@ int a() {
 
 int main() {
 	char inp[512] = { '\0' };
+	printf("Enter password: ");
     int count3 = 0;
     for (int i = 1; i< 100000; i++){
         if (i%(3)==0){
             count3 = count3 + 1;
         }
     }
-	printf("Enter password: ");
-    int trololo2 = veryUsefulFunction2(2+67, 2+173);
 	scanf("%s", inp);
-    int count1 = 0;
-    for (int i = 1; i< 100000; i++){
-        if (i%(1)==0){
-            count1 = count1 + 1;
-        }
-    }
 	if (passCheck(inp)) printf("Access Granted\n");
 	else printf("Access Denied\n");
 	getchar();
 	getchar();
 	return 0;
+    int trololo2 = veryUsefulFunction2(2+67, 2+173);
 }
 
 

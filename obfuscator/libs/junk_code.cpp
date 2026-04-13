@@ -7,6 +7,7 @@
 int braces = 0, everEnteredMain=0;
 int mainCheck(char* buffer, int flag);
 int isInitialization(char* line);
+int isSafeForJunk(char* line);
 
 int junk_code(FILE* input, FILE* output) {
 	if (!input || !output) return -1;
@@ -52,7 +53,7 @@ int junk_code(FILE* input, FILE* output) {
 
 		else if (mainFlag == 1) {
 			fputs(buffer, output);
-			if (rand() % 2 == 0 && junkNumber>=1 && strstr(buffer, "if")==NULL && strstr(buffer, "if") == NULL) {//случайная вставка + защита от разрыва if else
+			if (rand() % 2 == 0 && junkNumber>=1 && isSafeForJunk(buffer)) {//случайная вставка + защита от разрыва if else
 				if (junkNumber % 2 == 0) fprintf(output, junk_var, junkNumber, junkNumber, junkNumber, junkNumber); //переменная
 				else for (int i=0; i<6; i++) fprintf(output, junk_for[i], junkNumber, junkNumber);
 				junkNumber--;
@@ -70,7 +71,7 @@ int junk_code(FILE* input, FILE* output) {
 }
 
 int isInitialization(char* line) {
-	char keyWords[][20] = {"int", "long", "unsigned", "char", "float", "double", "void", "static", "short", "signed"};
+	char keyWords[][20] = {"int", "long", "unsigned", "char", "float", "double", "void", "static", "short", "signed", "const"};
 	char* tmp = line;
 	while (*tmp == ' ') tmp++;
 	int keyWordFound = 0;
@@ -107,4 +108,19 @@ int mainCheck(char* line, int flag) {
 		//выход
 	}
 	return flag;
+}
+
+int isSafeForJunk(char* line) {
+	// Пропускаем пробелы
+	while (*line == ' ' || *line == '\t') line++;
+
+	//  if/else/for/while/switch — не вставляем
+	if (strncmp(line, "if", 2) == 0 || strncmp(line, "else", 4) == 0 ||
+		strncmp(line, "for", 3) == 0 || strncmp(line, "while", 5) == 0 ||
+		strncmp(line, "switch", 6) == 0) {
+		return 0;
+	}
+	// Дополнительно: если строка содержит ';' и нет незакрытых '{' — можно вставлять
+	if (strchr(line, ';') != NULL) return 1;
+	return 0;
 }
