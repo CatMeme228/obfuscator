@@ -14,7 +14,7 @@ junk_code = true
 enable_function_and_var_rename = false
 
 #shake functions
-enable_functions_shake = false
+enable_functions_shake = true
 
 
 #space delete

@@ -5,9 +5,6 @@
 
 void encryption(char* pass);
 int    passCheck(char* pass);
-int a() {
-	return 0;
-}
 /*
 многострочный
 комментарий

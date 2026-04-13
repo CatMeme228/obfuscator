@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="libs\comment_remover.cpp" />
     <ClCompile Include="libs\junk_code.cpp" />
+    <ClCompile Include="libs\shaker.cpp" />
     <ClCompile Include="libs\space_remover.cpp" />
     <ClCompile Include="obfuscator.cpp" />
   </ItemGroup>

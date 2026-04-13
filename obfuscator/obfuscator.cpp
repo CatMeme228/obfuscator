@@ -79,7 +79,17 @@ int main() {
 
 	if (strcmp(configs[4], "true") == 0) {}//переименование функций
 
-	if (strcmp(configs[5], "true") == 0) {}//перемешивание функций
+	if (strcmp(configs[5], "true") == 0) {//перемешивание функций
+		if (shaker(input, output) == 0) printf("Functions were shaken!\n");
+		else printf("Failed to shake functions\n");
+
+		//копируем промежуточный результат
+		fclose(input);
+		fclose(output);
+		CopyFileA(configs[1], "temp.tmp", FALSE);
+		input = fopen("temp.tmp", "r");
+		output = fopen(configs[1], "w");
+	}
 
 	if (strcmp(configs[6], "true") == 0) { //удалить пробелы
 		if (space_remover(input, output) == 0) printf("Spaces, \\n and tabulation were deleted!\n");
