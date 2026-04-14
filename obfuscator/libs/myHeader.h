@@ -3,3 +3,4 @@ int comment_remover(FILE* input, FILE* output);
 int space_remover(FILE* input, FILE* output);
 int junk_code(FILE* input, FILE* output);
 int shaker(FILE* input, FILE* output);
+int renamer(FILE* input, FILE* output);
