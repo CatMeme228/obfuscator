@@ -11,10 +11,10 @@ comment_remover = true
 junk_code = true
 
 #functions and var rename
-enable_function_and_var_rename = false
+renamer = true
 
 #shake functions
-enable_functions_shake = true
+shaker = true
 
 
 #space delete
