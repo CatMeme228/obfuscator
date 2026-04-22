@@ -82,10 +82,8 @@ int shaker(FILE* input, FILE* output) {
     amountOfBraces = 0;
 
     // 2. Перемешивание прототипов и функций
-    if (amountOfInit > 0)
-        shuffleStringArray(myInitializations, amountOfInit);
-    if (amountOfFunctions > 0)
-        shuffleFunctionArray(myFunctions, myFunctionSizes, amountOfFunctions);
+    if (amountOfInit > 0) shuffleStringArray(myInitializations, amountOfInit);
+    if (amountOfFunctions > 0) shuffleFunctionArray(myFunctions, myFunctionSizes, amountOfFunctions);
 
     // 3. Генерация выходного файла
     char buffer[300];
@@ -102,10 +100,7 @@ int shaker(FILE* input, FILE* output) {
                     fputs(myInitializations[protoIndex], output);
                     protoIndex++;
                 }
-                else {
-                    // Если прототипов в списке меньше, чем в файле (странный случай) — оставляем как есть
-                    fputs(buffer, output);
-                }
+                else fputs(buffer, output); // Если прототипов в списке меньше, чем в файле (странный случай) — оставляем как есть
                 continue;
             }
             // Проверяем, не начался ли main
@@ -119,17 +114,13 @@ int shaker(FILE* input, FILE* output) {
             // Внутри main: просто копируем
             fputs(buffer, output);
             mainStatus = inFunction(buffer, mainStatus);
-            if (mainStatus == 0) {
-                inMain = 2;   // main закончился, переходим к выводу функций
-            }
+            if (mainStatus == 0) inMain = 2;   // main закончился, переходим к выводу функций
         }
         else if (inMain == 2) {
             // После main: игнорируем исходные строки (там обычно определения функций)
             // и выводим перемешанные функции
             if (funcIndex < amountOfFunctions) {
-                for (int i = 0; i < myFunctionSizes[funcIndex]; i++) {
-                    fputs(myFunctions[funcIndex][i], output);
-                }
+                for (int i = 0; i < myFunctionSizes[funcIndex]; i++) fputs(myFunctions[funcIndex][i], output);
                 funcIndex++;
             }
         }
@@ -137,12 +128,11 @@ int shaker(FILE* input, FILE* output) {
 
     // Если после main в файле не было ничего, а функции ещё остались — вывести их
     while (funcIndex < amountOfFunctions) {
-        for (int i = 0; i < myFunctionSizes[funcIndex]; i++) {
-            fputs(myFunctions[funcIndex][i], output);
-        }
+        for (int i = 0; i < myFunctionSizes[funcIndex]; i++) fputs(myFunctions[funcIndex][i], output);
         funcIndex++;
     }
 
+    greatClean();
     return 0;
 }
 
@@ -158,9 +148,7 @@ void collectData(FILE* inp) {
                 mainStatus = inFunction(buffer, mainStatus);
                 continue;
             }
-            if (isInit(buffer) && strchr(buffer, ';') != NULL) {
-                addInitialization(buffer);
-            }
+            if (isInit(buffer) && strchr(buffer, ';') != NULL) addInitialization(buffer);
         }
         else if (mainStatus == 1) {
             // Пропускаем тело main
@@ -181,11 +169,7 @@ void collectData(FILE* inp) {
             // Проверяем, не закончилась ли функция
             int prevBraces = amountOfBraces;
             inFunction(buffer, 2);   // обновляем счётчик скобок
-            if (prevBraces > 0 && amountOfBraces == 0 && everEnteredFunction) {
-                // Функция завершилась
-                inFunctionBody = 0;
-                //amountOfFunctions++;
-            }
+            if (prevBraces > 0 && amountOfBraces == 0 && everEnteredFunction) inFunctionBody = 0; // Функция завершилась 
         }
     }
 }
@@ -196,9 +180,7 @@ int isInit(char* line) {
     char* tmp = line;
     while (*tmp == ' ') tmp++;
     for (int i = 0; i < sizeof(keyWords) / sizeof(keyWords[0]); i++) {
-        if (strncmp(tmp, keyWords[i], strlen(keyWords[i])) == 0) {
-            return 1;
-        }
+        if (strncmp(tmp, keyWords[i], strlen(keyWords[i])) == 0) return 1;
     }
     return 0;
 }
@@ -223,7 +205,7 @@ int inFunction(char* line, int flag) {
     return flag;
 }
 
-// Очистка выделенной памяти (при необходимости)
+// Очистка выделенной памяти
 void greatClean() {
     for (int i = 0; i < amountOfInit; i++) free(myInitializations[i]);
     free(myInitializations);

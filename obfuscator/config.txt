@@ -16,6 +16,5 @@ renamer = true
 #shake functions
 shaker = true
 
-
 #space delete
 space_remover = true

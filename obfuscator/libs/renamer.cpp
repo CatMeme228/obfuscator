@@ -9,8 +9,7 @@
 #define HASH    '#'
 
 static int is_id_char(char c) {
-    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
-        (c >= '0' && c <= '9') || c == '_';
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_';
 }
 
 int renamer(FILE* inp, FILE* out) {
@@ -77,9 +76,7 @@ int renamer(FILE* inp, FILE* out) {
             while (i < Size && (Text[i] == SPACE || Text[i] == ASTERISK)) i++;
             char String[25] = { 0 };
             int j = 0;
-            while (i < Size && is_id_char(Text[i]) && j < 24) {
-                String[j++] = Text[i++];
-            }
+            while (i < Size && is_id_char(Text[i]) && j < 24) String[j++] = Text[i++];
             String[j] = '\0';
             i--; // коррекция после цикла
 
@@ -104,9 +101,7 @@ int renamer(FILE* inp, FILE* out) {
 
     // ---- Генерация новых имён ----
     char Replacement[100][25] = { {0} };
-    for (int i = 0; i < varCount; i++) {
-        sprintf(Replacement[i], "var_%d", i);
-    }
+    for (int i = 0; i < varCount; i++) sprintf(Replacement[i], "var_%d", i);
 
     // ---- Второй проход: замена идентификаторов ----
     for (unsigned long long i = 0; i < Size; i++) {
@@ -141,9 +136,7 @@ int renamer(FILE* inp, FILE* out) {
         // Извлекаем идентификатор
         char Word[25] = { 0 };
         int pos = 0;
-        while (i < Size && is_id_char(Text[i]) && pos < 24) {
-            Word[pos++] = Text[i++];
-        }
+        while (i < Size && is_id_char(Text[i]) && pos < 24) Word[pos++] = Text[i++];
         Word[pos] = '\0';
         i--;
 
@@ -162,9 +155,7 @@ int renamer(FILE* inp, FILE* out) {
                 break;
             }
         }
-        if (!replaced) {
-            fputs(Word, out);
-        }
+        if (!replaced) fputs(Word, out);
     }
 
     free(Text);
